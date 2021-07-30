@@ -1,4 +1,5 @@
 ﻿using System;
+using HomePaint.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,7 @@ namespace HomePaint
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LogoPage();
         }
 
         protected override void OnStart()

@@ -2,11 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.LogoPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="Lbl_Welcome" Text="Üdvözli a Home Paint 1.0" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+    <StackLayout x:Name="MasterStack">
+        <StackLayout x:Name="Welcome_Text" VerticalOptions="FillAndExpand">
             <Image x:Name="Logo" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
-            <Button x:Name="Btn_Start" Text="Kezdés" Clicked="StartProcedure()"/>
+            <Label x:Name="Lbl_Welcome" Text="Üdvözli a Home Paint 1.0" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
         </StackLayout>
-    </ContentPage.Content>
+        <StackLayout x:Name="Btn" VerticalOptions="StartAndExpand">
+            <Button x:Name="Btn_Start" Text="Kezdés" Clicked="StartProcedure"/>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>

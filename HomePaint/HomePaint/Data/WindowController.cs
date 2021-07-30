@@ -14,7 +14,7 @@ namespace HomePaint.Data
             return int.Parse(((Math.Pow(diameter, 2)) * Math.PI).ToString());
         }
 
-        public int RectagleArea(int h,int w)
+        public int RectagleArea(int h,int w)    
         {
             return h * w;
         }

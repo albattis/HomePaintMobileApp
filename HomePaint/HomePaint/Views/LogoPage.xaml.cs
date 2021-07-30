@@ -16,5 +16,10 @@ namespace HomePaint.Views
         {
             InitializeComponent();
         }
+
+        void StartProcedure(object sender, EventArgs e)
+        {
+            DisplayAlert("Induléás", "Xs", "OK");
+        }
     }
 }
