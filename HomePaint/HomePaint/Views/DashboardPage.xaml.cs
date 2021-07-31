@@ -3,26 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using HomePaint.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HomePaint.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LogoPage : ContentPage
+    public partial class DashboardPage : ContentPage
     {
-        public LogoPage()
+        public DashboardPage()
         {
             InitializeComponent();
+            Init();
         }
 
-       
-
-        void StartProcedure(object sender, EventArgs e)
+        void Init()
         {
-            
-            App.Current.MainPage = new DashboardPage();
+            image_logo.HeightRequest = ViewSetting.IconHeight;
+            Btn_Doors.WidthRequest = ViewSetting.Btn_Width;
+
+        }
+        void DoorClicked(object sender, EventArgs e)
+        {
             
         }
     }

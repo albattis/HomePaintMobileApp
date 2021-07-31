@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HomePaint.Views.DashboardPage">
+    <ContentPage.Content>
+        <StackLayout x:Name="MasterStacklayout" BackgroundColor="SkyBlue">
+            <StackLayout x:Name="LogoAndLabel" VerticalOptions="Start">
+                <Label x:Name="AppName" HorizontalTextAlignment="Center" FontSize="Medium" Text="Home Paint 1.0" />
+                <Image x:Name="image_logo" Source="Logo.png"/>
+            </StackLayout>
+            <StackLayout x:Name="Dash" VerticalOptions="Center">
+                <Label x:Name="Doors"  Text="Ajtókra vonatkozó adatok" HorizontalTextAlignment="Center" />
+                <Button x:Name="Btn_Doors" Text="Ajtók" Clicked="DoorClicked"/>
+            </StackLayout>
+            <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
+                <Label Text="Ablakra vonatkozó adatok"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

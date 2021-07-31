@@ -10,20 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace HomePaint.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LogoPage : ContentPage
+    public partial class DoorPage : ContentPage
     {
-        public LogoPage()
+        public DoorPage()
         {
             InitializeComponent();
-        }
-
-       
-
-        void StartProcedure(object sender, EventArgs e)
-        {
-            
-            App.Current.MainPage = new DashboardPage();
-            
         }
     }
 }
