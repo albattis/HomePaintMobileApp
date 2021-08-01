@@ -3,8 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.DoorPage">
     <ContentPage.Content>
-        <StackLayout>
-           
+        <StackLayout x:Name="MasterLayout">
+            <StackLayout x:Name="IconAndLabel" VerticalOptions="Start">
+                <Label x:Name="AppName" HorizontalTextAlignment="Center" FontSize="Medium" Text="Home Paint 1.0" />
+                <Image x:Name="image_logo" Source="Logo.png"/>
+            </StackLayout>
+            <StackLayout x:Name="WindowSetting" VerticalOptions="Center">
+                <Label Grid.ColumnSpan="2" Text="Ajtók adatai" HorizontalTextAlignment="Center" />
+                <Entry x:DataType="x:Int32" x:Name="DoorWidth" PlaceholderColor="Azure" Placeholder="Az ajtó magassága CM-ben"/>
+                <Entry x:DataType="x:Int32" x:Name="DoorHeight" PlaceholderColor="Azure" Placeholder="Az ajtó szélessége CM-ben"/>
+                <Button x:Name="DoorDataSendButton" Text="Ajtó adatainak mentése" Clicked="DoorDataSend" BackgroundColor="DarkCyan" TextColor="White"/>
+            </StackLayout>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -26,7 +26,7 @@ namespace HomePaint.Views
         }
         void DoorClicked(object sender, EventArgs e)
         {
-            
+            App.Current.MainPage=new DoorPage();
         }
     }
 }
