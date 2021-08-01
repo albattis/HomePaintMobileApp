@@ -6,14 +6,10 @@ namespace HomePaint.Model
 {
    public class Room
     {
-        public int RoomHeight { get; set; }
-        public Door[] doors;
-        public int DoorCounts { get { return doors.Length; }}
-       public WindowRectangle[] windowRectangles;
-        
-        public int WindowRoundCount { get { return windowRounds.Length; } }
-       public int WindowRectagleCount { get { return windowRectangles.Length; } }
-       public WindowRound[] windowRounds;
+        public int RoomHeight = 0;
+        public Door[] doors = new Door[100];
+        public WindowRectangle[] windowRectangles = new WindowRectangle[100];
+        public WindowRound[] windowRounds = new WindowRound[100];
 
         public Room() { }
     }

@@ -3,23 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.DashboardPage">
     <ContentPage.Content>
-        <StackLayout x:Name="MasterStacklayout" BackgroundColor="SkyBlue">
+        <StackLayout x:Name="MasterStacklayout" BackgroundColor="#4ea74a">
             <StackLayout x:Name="LogoAndLabel" VerticalOptions="Start">
-                <Label x:Name="AppName" HorizontalTextAlignment="Center" FontSize="Medium" Text="Home Paint 1.0" />
-                <Image x:Name="image_logo" Source="Logo.png"/>
+                <Label x:Name="AppName" HorizontalTextAlignment="Center" FontSize="Large" Text="Home Paint 1.0" />
+                <Image x:Name="image_logo" Margin="0,20,0,0" Source="Logo.png"/>
             </StackLayout>
-            <StackLayout x:Name="Dash" VerticalOptions="Center">
-                <Label x:Name="Door_Label" BackgroundColor="LightGreen" TextColor="White"/>
-                <Label x:Name="Doors"  Text="Ajtókra vonatkozó adatok" HorizontalTextAlignment="Center" />
-                <Button x:Name="Btn_Doors" Text="Ajtók" Clicked="DoorClicked"/>
+            <StackLayout x:Name="Dash" VerticalOptions="Center" Margin="10,10,10,10">
+                <Label x:Name="Door_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ajtó hozzáadva"/>
+                <Label x:Name="Window_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ablak hozzáadva."/>
             </StackLayout>
-            <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
-                <Label x:Name="Window_Label" BackgroundColor="LightGreen" TextColor="White"/>
-                <Label Text="Ablakra vonatkozó adatok" HorizontalTextAlignment="Center"/>
-                <Button x:Name="Btn_Window" Text="Új ablak hozzáadása" Clicked="WindowClicked"/>
+            <StackLayout x:Name="WindowProperty" Margin="20,120,20,100" VerticalOptions="CenterAndExpand">
+                 <Button x:Name="Btn_Doors" Margin="20,20,20,5" Text="Új ajtó hozzáadása" BackgroundColor="#DE9036" Clicked="DoorClicked"/>
+                <Button x:Name="Btn_Window" Margin="0,20,20,20" Text="Új ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
             </StackLayout>
-            <StackLayout x:Name="Completed" VerticalOptions="End">
-                <Button x:Name="Összegzés" Clicked="AllDataCounter"/>
+            <StackLayout x:Name="Completed" VerticalOptions="EndAndExpand">
+                <Button x:Name="Competed" Clicked="AllDataCounter" Text="Összegzés" BackgroundColor="#DE9036" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
