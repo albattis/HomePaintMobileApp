@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using HomePaint.Model;
 using Xamarin.Forms;
@@ -33,7 +34,8 @@ namespace HomePaint.Views
 
         async void RoomHeghtSet()
         {
-            string a=await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+            
+            string a=await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
             MyRoom.RoomHeight = int.Parse(a);
         }
 
@@ -67,7 +69,30 @@ namespace HomePaint.Views
 
         void AllDataCounter(object sender, EventArgs e)
         {
-            DisplayAlert("s", "s", "OK");
+           
+            Control.Text = "Adatok ellenőrzése....";
+            Control.IsVisible = true;
+            Thread.Sleep(1000);
+            Control.Text = "Ajtók adatainak ellenőrzése...";
+            Thread.Sleep(1000);
+
+            RoomControl Rc = new RoomControl();
+            Rc.DoorControl(MyRoom.doors);
+            Rc.Wait();
+            Control.Text = "Ablakok ellenörzése...";
+            Rc.Wait(); ;
+            Rc.WindowRoundControl(MyRoom.windowRounds);
+            Control.Text = "Adatok ellenörzése...";
+            Rc.Wait();
+            if (Rc.DoorsCount.Equals(DoorCounts)&&Rc.WindRectangleCount.Equals(WindowRectagleCount)&&Rc.WindRoundCount.Equals(WindowRoundCount))
+            {
+                Control.Text = "Ajtók rendben...";
+                Rc.Wait();
+                Control.Text += " Ablakok rendben...";
+                Rc.Wait(); Rc.Wait(); Rc.Wait();
+                Control.Text += " Adatok Rendben.";
+            }
+
         }
 
 
