@@ -27,12 +27,12 @@ namespace HomePaint.Views
         {
             if (!(MyRoom.RoomHeight > 0))
             {
-                RoomHeghtSet();
+                RoomHeightSet();
             }
             
         }
 
-        async void RoomHeghtSet()
+        async void RoomHeightSet()
         {
             
             string a=await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
@@ -84,7 +84,7 @@ namespace HomePaint.Views
             Rc.WindowRoundControl(MyRoom.windowRounds);
             Control.Text = "Adatok ellenörzése...";
             Rc.Wait();
-            if (Rc.DoorsCount.Equals(DoorCounts)&&Rc.WindRectangleCount.Equals(WindowRectagleCount)&&Rc.WindRoundCount.Equals(WindowRoundCount))
+            if (Rc.DoorsCount.Equals(DoorCounts + 1) && Rc.WindRectangleCount.Equals(WindowRectagleCount + 1) && Rc.WindRoundCount.Equals(WindowRoundCount + 1))
             {
                 Control.Text = "Ajtók rendben...";
                 Rc.Wait();
@@ -92,10 +92,15 @@ namespace HomePaint.Views
                 Rc.Wait(); Rc.Wait(); Rc.Wait();
                 Control.Text += " Adatok Rendben.";
             }
+            else
+            {
+                Control.BackgroundColor = Color.Red;
+                Control.TextColor = Color.White;
+                Control.Text = "Sikertelen ellenörzés";
+
+            }
 
         }
-
-
         async void WindowClicked(object sender, EventArgs e)
         {
             RoomHeightNotNUll();
@@ -120,5 +125,29 @@ namespace HomePaint.Views
             }
 
         }
+
+        async void WindowRoundClicked(object sender, EventArgs e)
+    {
+        RoomHeightNotNUll();
+        string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+        
+        try
+        {
+
+            MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
+            WindowRoundCount++;
+            Window_RoundLabel.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+
+        }
+        catch (FormatException)
+        {
+            await DisplayAlert("Hiba", "Hiba történt az ablak hozzáadás közben", "Ok.");
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
+        }
+
     }
+}
 }

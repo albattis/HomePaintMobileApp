@@ -11,10 +11,14 @@
             <StackLayout x:Name="Dash" VerticalOptions="Center" Margin="10,10,10,10">
                 <Label x:Name="Door_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ajtó hozzáadva"/>
                 <Label x:Name="Window_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ablak hozzáadva."/>
+                <Label x:Name="Window_RoundLabel" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs körablak hozzáadva."/>
+
             </StackLayout>
             <StackLayout x:Name="WindowProperty" Margin="20,20,20,20" VerticalOptions="CenterAndExpand">
                 <Button x:Name="Btn_Doors" Margin="20,20,20,20" CornerRadius="10" Text="Új ajtó hozzáadása" BackgroundColor="#DE9036" Clicked="DoorClicked"/>
-                <Button x:Name="Btn_Window" Margin="20,0,20,20" CornerRadius="10" Text="Új ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
+                <Button x:Name="Btn_Window" Margin="20,0,20,20" CornerRadius="10" Text="Új téglalap ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
+                <Button x:Name="Btn_Window" Margin="20,0,20,20" CornerRadius="10" Text="Új kör alakú ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowRoundClicked"/>
+
                 <Label x:Name="Control" Margin="30,30,30,30" Text="" IsVisible="false" BackgroundColor="#d5ca4b" FontSize="Medium"/>
             </StackLayout>
             <StackLayout x:Name="Completed" VerticalOptions="EndAndExpand">
