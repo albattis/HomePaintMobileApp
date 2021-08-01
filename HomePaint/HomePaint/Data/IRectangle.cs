@@ -6,7 +6,7 @@ namespace HomePaint.Data
 {
     interface IRectangle
     {
-        int Weight { get; set;}
+        int Width { get; set;}
         int Height { get; set; }
     }
 }

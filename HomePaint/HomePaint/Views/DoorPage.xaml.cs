@@ -21,33 +21,10 @@ namespace HomePaint.Views
 
         void DoorDataSend(object sender, EventArgs e)
         {
-            if (DoorHeight.Text != "" && DoorWidth.Text != "")
-            {
-                try
-                {
-                    d.Height = int.Parse(DoorHeight.Text);
-                    d.Weight = int.Parse(DoorWidth.Text);
-                }
-                catch (Exception)
-                {
-                    DisplayAlert("Hiba", "Csak számot lehet megadni.", "O.K.");
-                }
-                try
-                {
-                    d.DoorArea();
-                }
-                catch (DivideByZeroException)
-                {
-                    DisplayAlert("Hiba", "Hiba történt.", "OK");
-                }
-            }
-            else 
-            {
-                DisplayAlert("Hiba", "Nem adott meg minden adatot", "OK");
-            }
+            
         }
 
-        Door DoorDOne()
+       public Door DoorDOne()
         {
             return d;
         }

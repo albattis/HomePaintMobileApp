@@ -9,16 +9,17 @@ namespace HomePaint.Model
     {
        
         public int DoorAreas { get; set; }
-        public int Weight { get; set; }
+        public int Width { get; set; }
         public int Height { get; set; }
 
-        public Door()
-        {   }
-
-        public void DoorArea()
+        public Door() { }
+        public Door(int wid,int heigh)
         {
-            DoorController control = new DoorController();
-            DoorAreas=control.AreaCount(this.Height,this.Weight);
+            this.Height = heigh;
+            this.Width = wid;
+            DoorArea();
         }
+
+        public void DoorArea() => DoorAreas = DoorController.AreaCount(this.Height, this.Width);
     }
 }

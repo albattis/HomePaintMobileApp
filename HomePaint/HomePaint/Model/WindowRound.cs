@@ -10,12 +10,12 @@ namespace HomePaint.Model
         public int Diameter { get; set; }
         public int Area { get; set; }
 
-        public WindowRound() { }
+        public WindowRound(int dia) => Diameter = dia;
 
         public void WindowRoundArea()
         {
-            WindowController window = new WindowController();
-            Area = window.RoundArea(Diameter);
+
+            Area = WindowController.RoundArea(Diameter);
         }
     }
 }

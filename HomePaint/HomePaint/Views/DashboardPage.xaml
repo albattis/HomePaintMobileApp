@@ -9,11 +9,17 @@
                 <Image x:Name="image_logo" Source="Logo.png"/>
             </StackLayout>
             <StackLayout x:Name="Dash" VerticalOptions="Center">
+                <Label x:Name="Door_Label" BackgroundColor="LightGreen" TextColor="White"/>
                 <Label x:Name="Doors"  Text="Ajtókra vonatkozó adatok" HorizontalTextAlignment="Center" />
                 <Button x:Name="Btn_Doors" Text="Ajtók" Clicked="DoorClicked"/>
             </StackLayout>
             <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
-                <Label Text="Ablakra vonatkozó adatok"/>
+                <Label x:Name="Window_Label" BackgroundColor="LightGreen" TextColor="White"/>
+                <Label Text="Ablakra vonatkozó adatok" HorizontalTextAlignment="Center"/>
+                <Button x:Name="Btn_Window" Text="Új ablak hozzáadása" Clicked="WindowClicked"/>
+            </StackLayout>
+            <StackLayout x:Name="Completed" VerticalOptions="End">
+                <Button x:Name="Összegzés" Clicked="AllDataCounter"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
