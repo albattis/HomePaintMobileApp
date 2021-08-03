@@ -6,9 +6,10 @@ namespace HomePaint.Data
 {
      abstract class WindowController
     {
-        public static int RoundArea(int diameter)
+        public static double RoundArea(int diameter)
         {
-            return int.Parse(((Math.Pow(diameter, 2)) * Math.PI).ToString());
+            return double.Parse(((Math.Pow(diameter, 2)) * Math.PI).ToString());
+
         }
 
         public static int RectagleArea(int h, int w)

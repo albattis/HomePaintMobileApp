@@ -29,77 +29,67 @@ namespace HomePaint.Views
             {
                 RoomHeightSet();
             }
-            
+
         }
 
         async void RoomHeightSet()
         {
-            
-            string a=await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            string a = await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
             MyRoom.RoomHeight = int.Parse(a);
         }
-
         void Init()
         {
-            image_logo.HeightRequest = ViewSetting.IconHeight;
             Btn_Doors.WidthRequest = ViewSetting.Btn_Width;
-
         }
-         async void DoorClicked(object sender, EventArgs e)
+        async void DoorClicked(object sender, EventArgs e)
         {
             RoomHeightNotNUll();
-            string height = await DisplayPromptAsync("Új ajtó hozzáadása","Ajtó magassága Cm-ben","OK",maxLength:3,keyboard:Keyboard.Numeric);
+            string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
             string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
 
             try
             {
-                
 
-                MyRoom.doors[DoorCounts] = new Door(int.Parse(width),int.Parse(height));
+
+                MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height));
                 DoorCounts++;
                 Door_Label.Text = $"Ajtó sikeresen hozzáadva.\n\t Összesen: {DoorCounts} Db.";
-                
+
             }
-            catch (FormatException)
+            catch (Exception et)
             {
-               await DisplayAlert("Hiba", "Hiba történt az ajtó hozzáadás közben", "Ok.");
+                await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben {et}", "Ok.");
             }
-            
+
         }
 
         void AllDataCounter(object sender, EventArgs e)
         {
-           
-            Control.Text = "Adatok ellenőrzése....";
-            Control.IsVisible = true;
-            Thread.Sleep(1000);
-            Control.Text = "Ajtók adatainak ellenőrzése...";
-            Thread.Sleep(1000);
 
             RoomControl Rc = new RoomControl();
-            Rc.DoorControl(MyRoom.doors);
-            Rc.Wait();
-            Control.Text = "Ablakok ellenörzése...";
-            Rc.Wait(); ;
-            Rc.WindowRoundControl(MyRoom.windowRounds);
-            Control.Text = "Adatok ellenörzése...";
-            Rc.Wait();
-            if (Rc.DoorsCount.Equals(DoorCounts + 1) && Rc.WindRectangleCount.Equals(WindowRectagleCount + 1) && Rc.WindRoundCount.Equals(WindowRoundCount + 1))
+            Control.IsVisible = true;
+            try
             {
-                Control.Text = "Ajtók rendben...";
-                Rc.Wait();
-                Control.Text += " Ablakok rendben...";
-                Rc.Wait(); Rc.Wait(); Rc.Wait();
-                Control.Text += " Adatok Rendben.";
-            }
-            else
-            {
-                Control.BackgroundColor = Color.Red;
-                Control.TextColor = Color.White;
-                Control.Text = "Sikertelen ellenörzés";
+                Rc.DoorControl(MyRoom.doors);
+                Rc.WindowRectangleControl(MyRoom.windowRectangles);
+                Rc.WindowRoundControl(MyRoom.windowRounds);
+
+
+                if (Rc.DoorsCount.Equals(DoorCounts) && Rc.WindRectangleCount.Equals(WindowRectagleCount) && Rc.WindRoundCount.Equals(WindowRoundCount))
+                {
+
+                    Control.Text += " Adatok Rendben.";
+                }
+                else
+                {
+                    Control.BackgroundColor = Color.Red;
+                    Control.TextColor = Color.White;
+                    Control.Text = "Sikertelen ellenörzés";
+
+                }
 
             }
-
+            catch (Exception t) { DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
         }
         async void WindowClicked(object sender, EventArgs e)
         {
@@ -125,29 +115,38 @@ namespace HomePaint.Views
             }
 
         }
-
         async void WindowRoundClicked(object sender, EventArgs e)
-    {
-        RoomHeightNotNUll();
-        string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-        
-        try
         {
+            RoomHeightNotNUll();
+            string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
 
-            MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
-            WindowRoundCount++;
-            Window_RoundLabel.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+            try
+            {
+
+                MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
+                WindowRoundCount++;
+                Window_RoundLabel.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+
+            }
+            catch (FormatException)
+            {
+                await DisplayAlert("Hiba", "Hiba történt az ablak hozzáadás közben", "Ok.");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
+            }
 
         }
-        catch (FormatException)
+        async void RoomPAgeAdd(object sender, EventArgs e)
         {
-            await DisplayAlert("Hiba", "Hiba történt az ablak hozzáadás közben", "Ok.");
-        }
-        catch (ArgumentOutOfRangeException)
-        {
-            await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
-        }
+            await DisplayAlert("Figyelmeztetés", "Tisztelt felhazsnáló! Elöször a szoba magasságát adja meg. Következö három lépésben peddig a szoba oldalainak szélességét.", "Ok");
+            string Height = await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            string FirstWidth = await DisplayPromptAsync("Első fal", "Első fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            string SencondWidth = await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            string ThirdWidth = await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            string FourdWidth = await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
 
+        }
     }
-}
 }

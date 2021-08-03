@@ -29,8 +29,7 @@ namespace HomePaint.Data
                 return false;
             }
         }
-
-        public static bool ControlWindowRound(int d,int t)
+        public static bool ControlWindowRound(int d,double t)
         {
             if (d > 0 && t > 0)
             {
@@ -38,5 +37,6 @@ namespace HomePaint.Data
             }
             else { return false; }
         }
+       
     }
 }

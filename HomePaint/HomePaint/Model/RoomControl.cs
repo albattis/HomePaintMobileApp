@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using HomePaint.Data;
+using Xamarin.Forms.Xaml;
 
 namespace HomePaint.Model
 {
@@ -14,32 +15,31 @@ namespace HomePaint.Model
         public int DoorsCount = 0;
         public int WindRectangleCount = 0;
         public int WindRoundCount = 0;
-        public void Wait()
-        {
-        Thread.Sleep(10000);
-        }
 
+        public RoomControl() { }
         public void DoorControl(Door[] door)
         {
-            for (int i = 0; i < door.Length; i++)
-            {
-                if (!door[i].Equals(null))
+           
+                for (int i = 0; i < door.Length; i++)
                 {
-                    controldoor[DoorsCount] = Control.ControlDoor(door[i].Height, door[i].Width, door[i].DoorAreas);
-                    DoorsCount++;
+                    if (door[i]!=null)
+                    {
+                        controldoor[DoorsCount] = Control.ControlDoor(door[i].Height, door[i].Width, door[i].DoorAreas);
+                        DoorsCount++;
+                    }
                 }
-            }
+            
+          
         }
-
         public void WindowRectangleControl(WindowRectangle[] window)
         {
             for (int i = 0; i < window.Length; i++)
             {
-                if (!window[i].Equals(null))
+                if (window[i]!=null)
                 {
                    windowrectange[WindRectangleCount] = Control.ControlWindowRectangle(window[i].Height, window[i].Width, window[i].Areas);
                     WindRectangleCount++;
-                    Wait();
+                   
                 }
             }
         }
@@ -47,14 +47,22 @@ namespace HomePaint.Model
         {
             for (int i = 0; i < winRound.Length; i++)
             {
-                if (!winRound[i].Equals(null))
+                if (winRound[i]!=null)
                 {
                     windowround[WindRoundCount] = Control.ControlWindowRound(winRound[i].Diameter,winRound[i].Area);
                     WindRoundCount++;
-                    Wait();
+                   
                 }
             }
         }
 
+        public bool DataSummary(Room room)
+        {
+            if (room.doors.Length > 0 && room.RoomHeight > 0)
+            {
+                return true;
+            }
+            else { return false; }
+        }
     }
 }
