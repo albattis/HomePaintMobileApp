@@ -65,12 +65,12 @@ namespace HomePaint.Views
 
         void AllDataCounter(object sender, EventArgs e)
         {
-
+            Control.Text = "";
             RoomControl Rc = new RoomControl();
             Control.IsVisible = true;
             try
             {
-                Rc.DoorControl(MyRoom.doors);
+                Rc.DoorControlAndAreaCount(MyRoom.doors);
                 Rc.WindowRectangleControl(MyRoom.windowRectangles);
                 Rc.WindowRoundControl(MyRoom.windowRounds);
 
@@ -122,7 +122,7 @@ namespace HomePaint.Views
 
             try
             {
-
+                
                 MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
                 WindowRoundCount++;
                 Window_RoundLabel.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
@@ -140,12 +140,16 @@ namespace HomePaint.Views
         }
         async void RoomPAgeAdd(object sender, EventArgs e)
         {
-            await DisplayAlert("Figyelmeztetés", "Tisztelt felhazsnáló! Elöször a szoba magasságát adja meg. Következö három lépésben peddig a szoba oldalainak szélességét.", "Ok");
-            string Height = await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-            string FirstWidth = await DisplayPromptAsync("Első fal", "Első fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-            string SencondWidth = await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-            string ThirdWidth = await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-            string FourdWidth = await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+            try
+            {
+                await DisplayAlert("Figyelmeztetés", "Tisztelt felhasználó! Elöször a szoba magasságát adja meg. Következö három lépésben peddig a szoba oldalainak szélességét.", "Ok");
+            MyRoom.RoomHeight =int.Parse( await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
+            MyRoom.Wall[0] = int.Parse(await DisplayPromptAsync("Első fal", "Első fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
+            MyRoom.Wall[1] = int.Parse(await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
+            MyRoom.Wall[2] = int.Parse(await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
+            MyRoom.Wall[3] = int.Parse(await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));   
+            }
+            catch (Exception a) { await DisplayAlert("error", $"{a}", "Ok"); }
 
         }
     }

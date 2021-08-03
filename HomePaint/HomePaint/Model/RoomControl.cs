@@ -17,7 +17,7 @@ namespace HomePaint.Model
         public int WindRoundCount = 0;
 
         public RoomControl() { }
-        public void DoorControl(Door[] door)
+        public void DoorControlAndAreaCount(Door[] door)
         {
            
                 for (int i = 0; i < door.Length; i++)
@@ -56,13 +56,9 @@ namespace HomePaint.Model
             }
         }
 
-        public bool DataSummary(Room room)
+        public void DataSummary(Room room)
         {
-            if (room.doors.Length > 0 && room.RoomHeight > 0)
-            {
-                return true;
-            }
-            else { return false; }
-        }
+
+        }  
     }
 }
