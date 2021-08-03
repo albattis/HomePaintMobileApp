@@ -15,6 +15,7 @@ namespace HomePaint.Model
         public int DoorsCount = 0;
         public int WindRectangleCount = 0;
         public int WindRoundCount = 0;
+        public double TotalPaint = 0;
 
         public RoomControl() { }
         public void DoorControlAndAreaCount(Door[] door)
@@ -58,7 +59,8 @@ namespace HomePaint.Model
 
         public void DataSummary(Room room)
         {
-
+            PaintCounter paint = new PaintCounter(room);
+            TotalPaint = paint.TotalPaintCount;
         }  
     }
 }

@@ -87,6 +87,7 @@ namespace HomePaint.Views
                     Control.Text = "Sikertelen ellenörzés";
 
                 }
+                Rc.DataSummary(MyRoom);
 
             }
             catch (Exception t) { DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
