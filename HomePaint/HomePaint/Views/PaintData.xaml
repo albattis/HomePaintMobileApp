@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.PaintData">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="MasterStack">
+            <StackLayout x:Name="Logo">
+                <Image x:Name="Logo" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
+                <Label x:Name="Lbl_Welcome" BackgroundColor="#D5ca4b" Text="Üdvözli a Home Paint 1.0" FontSize="Large" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout x:Name="Data" HorizontalOptions="CenterAndExpand">
+                <Label x:Name="DataLoad" BackgroundColor="#D5CA4B" Text="" FontSize="Large" HorizontalTextAlignment="Center"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

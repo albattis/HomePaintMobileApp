@@ -10,9 +10,7 @@
             </StackLayout>
             <StackLayout x:Name="Dash" VerticalOptions="Center" Margin="10,10,10,10">
                 <Label x:Name="Door_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ajtó hozzáadva"/>
-                <Label x:Name="Window_Label" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs ablak hozzáadva."/>
-                <Label x:Name="Window_RoundLabel" BackgroundColor="#D5ca4b" HorizontalTextAlignment="Center" FontSize="Medium" Text="Nincs körablak hozzáadva."/>
-
+                
             </StackLayout>
             <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
                 <Button x:Name="Rooms" Text="Szoba oldalainak adatai" BackgroundColor="#DE9036" CornerRadius="10" Clicked="RoomPAgeAdd"/>

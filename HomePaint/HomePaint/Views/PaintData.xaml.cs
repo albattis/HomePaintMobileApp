@@ -12,9 +12,16 @@ namespace HomePaint.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PaintData : ContentPage
     {
-        public PaintData()
+        public PaintData(double data)
         {
             InitializeComponent();
+        }
+
+        void DataScreen(double d)
+        {
+            
+            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{d}";
+
         }
     }
 }
