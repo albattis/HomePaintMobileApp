@@ -15,13 +15,19 @@ namespace HomePaint.Views
         public PaintData(double data)
         {
             InitializeComponent();
+            DataScreen(data);
         }
 
         void DataScreen(double d)
         {
             
-            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{d}";
+            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{Math.Round(d)} Liter festék kell.";
 
+        }
+
+        void Back(object sender, EventArgs e)
+        {
+             Application.Current.MainPage.Navigation.RemovePage(this);
         }
     }
 }

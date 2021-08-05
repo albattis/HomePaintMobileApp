@@ -32,6 +32,11 @@ namespace HomePaint.Views
 
         }
 
+        void Clear(object sender, EventArgs e)
+        {
+            MyRoom = new Room();
+            Door_Label.Text = "Adatok üritve";
+        }
         async void RoomHeightSet()
         {
             string a = await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
@@ -53,7 +58,7 @@ namespace HomePaint.Views
 
                 MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height));
                 DoorCounts++;
-                Door_Label.Text = $"Ajtó sikeresen hozzáadva.\n\t Összesen: {DoorCounts} Db.";
+                Door_Label.Text = $"Ajtó";
 
             }
             catch (Exception et)
@@ -63,7 +68,8 @@ namespace HomePaint.Views
 
         }
 
-        void AllDataCounter(object sender, EventArgs e)
+        [Obsolete]
+        async void AllDataCounterAsync(object sender, EventArgs e)
         {
             Control.Text = "";
             RoomControl Rc = new RoomControl();
@@ -79,6 +85,11 @@ namespace HomePaint.Views
                 {
 
                     Control.Text += " Adatok Rendben.";
+                    if (MyRoom.RoomHeight>0&&DoorCounts>0) 
+                    { Rc.DataSummary(MyRoom);
+                        if (Device.OS == TargetPlatform.Android)
+                        { Application.Current.MainPage = new NavigationPage(new PaintData(Rc.TotalPaint)); }
+                    }
                 }
                 else
                 {
@@ -87,11 +98,9 @@ namespace HomePaint.Views
                     Control.Text = "Sikertelen ellenörzés";
 
                 }
-                Rc.DataSummary(MyRoom);
-                 DisplayAlert("e", $"{Rc.TotalPaint}", "Ok");
-
+               
             }
-            catch (Exception t) { DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
+            catch (Exception t) {await DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
         }
         async void WindowClicked(object sender, EventArgs e)
         {
@@ -104,7 +113,7 @@ namespace HomePaint.Views
 
                 MyRoom.windowRectangles[WindowRectagleCount] = new WindowRectangle(int.Parse(width), int.Parse(height));
                 WindowRectagleCount++;
-                Window_Label.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+                Door_Label.Text += $" Ablak ";
 
             }
             catch (FormatException)
@@ -127,7 +136,7 @@ namespace HomePaint.Views
                 
                 MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
                 WindowRoundCount++;
-                Window_RoundLabel.Text = $"Ablak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+                Door_Label.Text = $"\nAblak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
 
             }
             catch (FormatException)
@@ -144,12 +153,13 @@ namespace HomePaint.Views
         {
             try
             {
-                await DisplayAlert("Figyelmeztetés", "Tisztelt felhasználó! Elöször a szoba magasságát adja meg. Következö három lépésben peddig a szoba oldalainak szélességét.", "Ok");
+                await DisplayAlert("Figyelmeztetés", "Kedves felhasználó! Elöször a szoba magasságát adja meg. Következö három lépésben peddig a szoba oldalainak szélességét.", "Ok");
             MyRoom.RoomHeight =int.Parse( await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[0] = int.Parse(await DisplayPromptAsync("Első fal", "Első fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[1] = int.Parse(await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[2] = int.Parse(await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
-            MyRoom.Wall[3] = int.Parse(await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));   
+            MyRoom.Wall[3] = int.Parse(await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
+                Door_Label.Text += "Szoba falak";
             }
             catch (Exception a) { await DisplayAlert("error", $"{a}", "Ok"); }
 

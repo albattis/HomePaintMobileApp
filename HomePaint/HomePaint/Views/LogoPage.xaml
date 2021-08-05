@@ -5,7 +5,7 @@
     <StackLayout x:Name="MasterStack" BackgroundColor="#4ea74a">
         <StackLayout x:Name="Welcome_Text" VerticalOptions="FillAndExpand">
             <Image x:Name="Logo" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
-            <Label x:Name="Lbl_Welcome" BackgroundColor="#D5ca4b" Text="Üdvözli a Home Paint 1.0" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+            <Label x:Name="Lbl_Welcome" BackgroundColor="#D5ca4b" Text="Üdvözli a Home Paint 1.0" VerticalOptions="Fill" HorizontalTextAlignment="Center" />
         </StackLayout>
         <StackLayout x:Name="Btn" VerticalOptions="StartAndExpand">
             <Button x:Name="Btn_Start" CornerRadius="10" Text="Kezdés" Clicked="StartProcedure" BackgroundColor="#DE9036" />

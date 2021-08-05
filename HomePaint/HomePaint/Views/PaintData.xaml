@@ -4,12 +4,16 @@
              x:Class="HomePaint.Views.PaintData">
     <ContentPage.Content>
         <StackLayout x:Name="MasterStack">
-            <StackLayout x:Name="Logo">
-                <Image x:Name="Logo" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
-                <Label x:Name="Lbl_Welcome" BackgroundColor="#D5ca4b" Text="Üdvözli a Home Paint 1.0" FontSize="Large" VerticalOptions="FillAndExpand" HorizontalTextAlignment="Center" />
+            <StackLayout x:Name="Logo" Margin="20,20,20,20">
+                <Image x:Name="LogoPaint" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
+                
             </StackLayout>
             <StackLayout x:Name="Data" HorizontalOptions="CenterAndExpand">
                 <Label x:Name="DataLoad" BackgroundColor="#D5CA4B" Text="" FontSize="Large" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            <StackLayout x:Name="BackNavigatton">
+                <Button Text="Vissza" CornerRadius="10" BackgroundColor="#DE9036" Margin="10,10,10,10" Clicked="Back" />
+                
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
