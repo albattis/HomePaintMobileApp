@@ -22,7 +22,7 @@
                 <Label x:Name="Control" Margin="30,30,30,30" Text="" IsVisible="false" BackgroundColor="#d5ca4b" FontSize="Medium"/>
             </StackLayout>
             <StackLayout x:Name="Completed" VerticalOptions="End">
-                <Button x:Name="Competed" CornerRadius="10" Text="Összegzés" BackgroundColor="#DE9036" Clicked="AllDataCounter" />
+                <Button x:Name="Competed" CornerRadius="10" Margin="20,20,20,20" Text="Összegzés" BackgroundColor="#DE9036" Clicked="AllDataCounter" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
