@@ -8,7 +8,7 @@ namespace HomePaint.Data
     {
         public static double RoundArea(int diameter)
         {
-            return double.Parse(((Math.Pow(diameter, 2)) * Math.PI).ToString());
+            return double.Parse(((Math.Pow((diameter/2), 2)) * Math.PI).ToString());
 
         }
 

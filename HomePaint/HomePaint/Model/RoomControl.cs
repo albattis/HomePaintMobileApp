@@ -60,7 +60,7 @@ namespace HomePaint.Model
         public void DataSummary(Room room)
         {
             PaintCounter paint = new PaintCounter(room);
-            TotalPaint = paint.TotalPaintCount;
+            TotalPaint=(paint.TotalPaintCount/10000);
         }  
     }
 }

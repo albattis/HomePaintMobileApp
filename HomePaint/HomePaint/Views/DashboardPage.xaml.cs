@@ -88,6 +88,7 @@ namespace HomePaint.Views
 
                 }
                 Rc.DataSummary(MyRoom);
+                 DisplayAlert("e", $"{Rc.TotalPaint}", "Ok");
 
             }
             catch (Exception t) { DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
