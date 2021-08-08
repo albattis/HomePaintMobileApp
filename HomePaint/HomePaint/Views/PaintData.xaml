@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.PaintData">
     <ContentPage.Content>
-        <StackLayout x:Name="MasterStack">
+        <StackLayout x:Name="MasterStack" BackgroundColor="#4ea74a">
             <StackLayout x:Name="Logo" Margin="20,20,20,20">
                 <Image x:Name="LogoPaint" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
                 

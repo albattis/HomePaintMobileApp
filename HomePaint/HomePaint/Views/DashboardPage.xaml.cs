@@ -77,9 +77,9 @@ namespace HomePaint.Views
         [Obsolete]
         async void AllDataCounterAsync(object sender, EventArgs e)
         {
-            Control.Text = "";
+           
             RoomControl Rc = new RoomControl();
-            Control.IsVisible = true;
+           
             try
             {
                 Rc.DoorControlAndAreaCount(MyRoom.doors);
@@ -90,19 +90,23 @@ namespace HomePaint.Views
                 if (Rc.DoorsCount.Equals(DoorCounts) && Rc.WindRectangleCount.Equals(WindowRectagleCount) && Rc.WindRoundCount.Equals(WindowRoundCount))
                 {
 
-                    Control.Text += " Adatok Rendben.";
-                    if (MyRoom.RoomHeight>0&&DoorCounts>0) 
-                    { Rc.DataSummary(MyRoom);
+
+                    if (MyRoom.RoomHeight > 0 && DoorCounts > 0)
+                    {
+                        Rc.DataSummary(MyRoom);
                         if (Device.OS == TargetPlatform.Android)
                         { Application.Current.MainPage = new NavigationPage(new PaintData(Rc.TotalPaint)); }
+                    }
+                    else
+                    {
+                        await this.DisplayToastAsync("Adatok űresek", 5000);
+
                     }
                 }
                 else
                 {
-                    Control.BackgroundColor = Color.Red;
-                    Control.TextColor = Color.White;
-                    Control.Text = "Sikertelen ellenörzés";
 
+                    await this.DisplayToastAsync("Adatok űresek", 5000);
                 }
                
             }
@@ -137,7 +141,7 @@ namespace HomePaint.Views
                         Message = "Ablak hozzáadva."
                     },
                     BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(10),
+                    Duration = TimeSpan.FromSeconds(3),
                     Actions = new[] { actions }
                 };
                 await this.DisplaySnackBarAsync(options);
@@ -176,7 +180,7 @@ namespace HomePaint.Views
                         Message = "Ablak hozzáadva."
                     },
                     BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(10),
+                    Duration = TimeSpan.FromSeconds(3),
                     Actions = new[] { actions }
                 };
                 await this.DisplaySnackBarAsync(options);
@@ -225,7 +229,7 @@ namespace HomePaint.Views
                         Message = "Ajtó hozzáadva."
                     },
                     BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(10),
+                    Duration = TimeSpan.FromSeconds(3),
                     Actions = new[] { actions }
                 };
                 await this.DisplaySnackBarAsync(options);

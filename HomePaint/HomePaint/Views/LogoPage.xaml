@@ -4,7 +4,7 @@
              x:Class="HomePaint.Views.LogoPage">
     <StackLayout x:Name="MasterStack" BackgroundColor="#4ea74a">
         <StackLayout x:Name="Welcome_Text" VerticalOptions="FillAndExpand">
-            <Image x:Name="Logo" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
+            <Image x:Name="Logo" Source="Logo.png" Margin="10,10,10,10" HorizontalOptions="StartAndExpand"/>
             <Label x:Name="Lbl_Welcome" BackgroundColor="#D5ca4b" Text="Üdvözli a Home Paint 1.0" VerticalOptions="Fill" HorizontalTextAlignment="Center" />
         </StackLayout>
         <StackLayout x:Name="Btn" VerticalOptions="StartAndExpand">
