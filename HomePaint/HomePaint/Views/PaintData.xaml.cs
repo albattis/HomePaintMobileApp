@@ -27,7 +27,7 @@ namespace HomePaint.Views
 
         void Back(object sender, EventArgs e)
         {
-             Application.Current.MainPage.Navigation.RemovePage(this);
+             Application.Current.MainPage= new DashboardPage();
         }
     }
 }

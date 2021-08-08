@@ -10,5 +10,6 @@ namespace HomePaint.Data
         {
             return height * weight;
         }
+        
     }
 }

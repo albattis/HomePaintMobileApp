@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using HomePaint.Model;
+using Xamarin.CommunityToolkit.Extensions;
+using Xamarin.CommunityToolkit.UI.Views.Options;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,10 +34,10 @@ namespace HomePaint.Views
 
         }
 
-        void Clear(object sender, EventArgs e)
+        async void Clear(object sender, EventArgs e)
         {
             MyRoom = new Room();
-            Door_Label.Text = "Adatok üritve";
+            await this.DisplayToastAsync("Adatok űritve", 5000);
         }
         async void RoomHeightSet()
         {
@@ -46,28 +48,32 @@ namespace HomePaint.Views
         {
             Btn_Doors.WidthRequest = ViewSetting.Btn_Width;
         }
-        async void DoorClicked(object sender, EventArgs e)
+        
+        Task WallDelelte()
         {
-            RoomHeightNotNUll();
-            string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-            string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-
-            try
-            {
-
-
-                MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height));
-                DoorCounts++;
-                Door_Label.Text = $"Ajtó";
-
-            }
-            catch (Exception et)
-            {
-                await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben {et}", "Ok.");
-            }
-
+            MyRoom.Wall = new int[4];
+            MyRoom.RoomHeight = 0;
+            return Task.CompletedTask;
         }
-
+        Task DoorDelete()
+        {
+            MyRoom.doors[DoorCounts] = null;
+            DoorCounts--;
+            
+            return Task.CompletedTask;
+        }
+        Task WindowsRectagleCountDelete()
+        {
+            MyRoom.windowRectangles[WindowRectagleCount] = null;
+            WindowRectagleCount--;
+            return Task.CompletedTask;
+        }
+        Task WindowsRoundCountDelete()
+        {
+            MyRoom.windowRounds[WindowRoundCount] = null;
+            WindowRoundCount--;
+            return Task.CompletedTask;
+        }
         [Obsolete]
         async void AllDataCounterAsync(object sender, EventArgs e)
         {
@@ -110,20 +116,41 @@ namespace HomePaint.Views
 
             try
             {
+                if (MyRoom.windowRectangles[WindowRectagleCount] != null)
+                {
+                    MyRoom.windowRectangles[WindowRectagleCount].Width = int.Parse(width);
+                    MyRoom.windowRectangles[WindowRectagleCount].Height = int.Parse(height);
+                }
+                else { MyRoom.windowRectangles[WindowRectagleCount] = new WindowRectangle(int.Parse(width), int.Parse(height)); }
+                Console.WriteLine(WindowRectagleCount);
+                var actions = new SnackBarActionOptions
+                {
+                    Action = () => WindowsRectagleCountDelete(),
+                    Text = "Visszavonás"
+                };
 
-                MyRoom.windowRectangles[WindowRectagleCount] = new WindowRectangle(int.Parse(width), int.Parse(height));
+                var options = new SnackBarOptions
+                {
+                    MessageOptions = new MessageOptions
+                    {
+                        Foreground = Color.Black,
+                        Message = "Ablak hozzáadva."
+                    },
+                    BackgroundColor = Color.FromHex("#DE9036"),
+                    Duration = TimeSpan.FromSeconds(10),
+                    Actions = new[] { actions }
+                };
+                await this.DisplaySnackBarAsync(options);
+                Console.WriteLine(WindowRectagleCount);
                 WindowRectagleCount++;
-                Door_Label.Text += $" Ablak ";
+                
 
             }
             catch (FormatException)
             {
                 await DisplayAlert("Hiba", "Hiba történt az ablak hozzáadás közben", "Ok.");
             }
-            catch (ArgumentOutOfRangeException)
-            {
-                await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
-            }
+            Console.WriteLine(WindowRectagleCount);
 
         }
         async void WindowRoundClicked(object sender, EventArgs e)
@@ -133,11 +160,30 @@ namespace HomePaint.Views
 
             try
             {
-                
                 MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
-                WindowRoundCount++;
-                Door_Label.Text = $"\nAblak sikeresen hozzáadva.\n\t Összesen: {WindowRectagleCount + WindowRoundCount} Db.";
+                var actions = new SnackBarActionOptions
+                {
+                    Action = () => WindowsRoundCountDelete() ,
+                    Text = "Visszavonás"
+                };
+                Console.WriteLine(WindowRoundCount);
 
+                var options = new SnackBarOptions
+                {
+                    MessageOptions = new MessageOptions
+                    {
+                        Foreground = Color.Black,
+                        Message = "Ablak hozzáadva."
+                    },
+                    BackgroundColor = Color.FromHex("#DE9036"),
+                    Duration = TimeSpan.FromSeconds(10),
+                    Actions = new[] { actions }
+                };
+                await this.DisplaySnackBarAsync(options);
+
+                Console.WriteLine(WindowRoundCount);
+                WindowRoundCount++;
+                
             }
             catch (FormatException)
             {
@@ -147,8 +193,53 @@ namespace HomePaint.Views
             {
                 await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
             }
-
+            Console.WriteLine(WindowRoundCount);
         }
+        async void DoorClicked(object sender, EventArgs e)
+        {
+            RoomHeightNotNUll();
+            string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+            string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+            Console.WriteLine(DoorCounts);
+            try
+            {
+
+                if (MyRoom.doors[DoorCounts] != null)
+                {
+                    MyRoom.doors[DoorCounts].Height = int.Parse(height);
+                    MyRoom.doors[DoorCounts].Width = int.Parse(width);
+                }
+                else { MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height)); }
+
+                 var actions = new SnackBarActionOptions
+                {
+                    Action = () => DoorDelete(),
+                    Text = "Visszavonás"
+                };
+
+                var options = new SnackBarOptions
+                {
+                    MessageOptions = new MessageOptions
+                    {
+                        Foreground = Color.Black,
+                        Message = "Ajtó hozzáadva."
+                    },
+                    BackgroundColor = Color.FromHex("#DE9036"),
+                    Duration = TimeSpan.FromSeconds(10),
+                    Actions = new[] { actions }
+                };
+                await this.DisplaySnackBarAsync(options);
+
+                DoorCounts++;
+                Console.WriteLine(DoorCounts);
+            }
+            catch (Exception et)
+            {
+                await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben {et}", "Ok.");
+            }
+            Console.WriteLine(DoorCounts);
+        }
+
         async void RoomPAgeAdd(object sender, EventArgs e)
         {
             try
@@ -159,7 +250,26 @@ namespace HomePaint.Views
             MyRoom.Wall[1] = int.Parse(await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[2] = int.Parse(await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[3] = int.Parse(await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
-                Door_Label.Text += "Szoba falak";
+               
+                var actions = new SnackBarActionOptions
+                {
+                    Action = () => WallDelelte(),
+                    Text = "Visszavonás"
+                };
+
+                var options = new SnackBarOptions
+                {
+                    MessageOptions = new MessageOptions
+                    {
+                        Foreground = Color.Black,
+                        Message = "Szoba oldalak hozzáadva."
+                    },
+                    BackgroundColor = Color.FromHex("#DE9036"),
+                    Duration = TimeSpan.FromSeconds(10),
+                    Actions = new[] { actions }
+                };
+                await this.DisplaySnackBarAsync(options);
+
             }
             catch (Exception a) { await DisplayAlert("error", $"{a}", "Ok"); }
 

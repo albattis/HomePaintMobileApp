@@ -9,9 +9,9 @@ namespace HomePaint.Model
 {
     public class RoomControl
     {
-        bool[] controldoor = new bool[100];
-        bool[] windowrectange = new bool[100];
-        bool[] windowround = new bool[100];
+        bool[] controldoor = new bool[5];
+        bool[] windowrectange = new bool[5];
+        bool[] windowround = new bool[5];
         public int DoorsCount = 0;
         public int WindRectangleCount = 0;
         public int WindRoundCount = 0;
