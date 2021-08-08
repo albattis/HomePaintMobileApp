@@ -44,7 +44,7 @@ namespace HomePaint.Views
         }
         void Init()
         {
-            Btn_Doors.WidthRequest = ViewSetting.Btn_Width;
+            //1.0
         }
         async void DoorClicked(object sender, EventArgs e)
         {

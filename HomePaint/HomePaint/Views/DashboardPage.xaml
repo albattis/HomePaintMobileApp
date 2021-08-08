@@ -13,15 +13,13 @@
                 
             </StackLayout>
             <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
-                <Button x:Name="Rooms" Text="Szoba oldalainak adatai" BackgroundColor="#DE9036" CornerRadius="10" Clicked="RoomPAgeAdd"/>
-                <Button x:Name="Btn_Doors" CornerRadius="10" Text="Új ajtó hozzáadása" BackgroundColor="#DE9036" Clicked="DoorClicked"/>
-                <Button x:Name="Btn_Window" CornerRadius="10" Text="Új téglalap ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
-                <Button x:Name="Btn_WindowRound" CornerRadius="10" Text="Új kör alakú ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowRoundClicked"/>
-                <Button x:Name="Clears" CornerRadius="10" Text="Adatok üritése" Clicked="Clear" BackgroundColor="#DE9036" />
+                <ImageButton x:Name="doorsadd" Source="door.jpg" Clicked="DoorClicked" WidthRequest="100" HeightRequest="100" />
+                <ImageButton x:Name="windowsadd" Source="window.jpg" Clicked="WindowClicked" WidthRequest="100" HeightRequest="100" />
+
                 <Label x:Name="Control" Margin="30,30,30,30" Text="" IsVisible="false" BackgroundColor="#d5ca4b" FontSize="Medium"/>
             </StackLayout>
             <StackLayout x:Name="Completed" VerticalOptions="End">
-                <Button x:Name="Competed" CornerRadius="10" Margin="20,20,20,20" Text="Összegzés" BackgroundColor="#DE9036" Clicked="AllDataCounterAsync" />
+                <ImageButton x:Name="alldata" Source="go.jpg" Clicked="AllDataCounterAsync" WidthRequest="100" HeightRequest="100" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
