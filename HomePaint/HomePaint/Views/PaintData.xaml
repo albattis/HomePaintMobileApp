@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HomePaint.Views.PaintData">
     <ContentPage.Content>
-        <StackLayout x:Name="MasterStack" BackgroundColor="#4ea74a">
+        <StackLayout x:Name="MasterStack" BackgroundColor="#A4D5DF">
             <StackLayout x:Name="Logo" Margin="20,20,20,20">
                 <Image x:Name="LogoPaint" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
                 
             </StackLayout>
             <StackLayout x:Name="Data" HorizontalOptions="CenterAndExpand">
-                <Label x:Name="DataLoad" BackgroundColor="#D5CA4B" Text="" FontSize="Large" HorizontalTextAlignment="Center"/>
+                <Label x:Name="DataLoad" BackgroundColor="#D5CA4B" Text="" TextColor="White" FontSize="Large" HorizontalTextAlignment="Center"/>
             </StackLayout>
             <StackLayout x:Name="BackNavigatton">
-                <Button Text="Vissza" CornerRadius="10" BackgroundColor="#DE9036" Margin="10,10,10,10" Clicked="Back" />
+                <Button Text="Vissza" CornerRadius="10" BackgroundColor="#858687" TextColor="White"  Margin="10,10,10,10" Clicked="Back" />
                 
             </StackLayout>
         </StackLayout>
