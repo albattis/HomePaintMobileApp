@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HomePaint.Data
 {
-    abstract class DoorController
+   public abstract class DoorController
     {
         public static int AreaCount(int height,int weight)
         {

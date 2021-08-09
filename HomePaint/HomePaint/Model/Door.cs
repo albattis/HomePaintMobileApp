@@ -15,11 +15,14 @@ namespace HomePaint.Model
         public Door() { }
         public Door(int wid,int heigh)
         {
-            this.Height = heigh;
-            this.Width = wid;
+            Height = heigh;
+            Width = wid;
             DoorArea();
         }
 
-        public void DoorArea() => DoorAreas = DoorController.AreaCount(this.Height, this.Width);
+        public void DoorArea()
+        {
+            DoorAreas = DoorController.AreaCount(Height, Width);
+        }
     }
 }

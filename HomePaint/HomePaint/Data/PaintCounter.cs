@@ -7,10 +7,10 @@ namespace HomePaint.Data
 {
     public class PaintCounter
     {
-        int RoomTotalArea;
-        int DoorTotalArea = 0;
-        int WindowRectangleTotalArea=0;
-        double WindowRoundTotalArea=0;
+        public int RoomTotalArea;
+        public int DoorTotalArea;
+        public int WindowRectangleTotalArea=0;
+        public double WindowRoundTotalArea=0;
         public double TotalPaintCount=0;
         Room myroom;
         public PaintCounter(Room myroom)
@@ -24,7 +24,7 @@ namespace HomePaint.Data
             PaintCount();
         }
 
-        void DoorAreaCount()
+      public void DoorAreaCount()
         {
             for (int i = 0; i < myroom.doors.Length; i++)
             {
@@ -32,14 +32,14 @@ namespace HomePaint.Data
                 { DoorTotalArea += myroom.doors[i].DoorAreas; }
             }
         }
-        void RoomCount()
+       public void RoomCount()
         {
             for (int i = 0; i < myroom.Wall.Length; i++)
             {
                 RoomTotalArea += (myroom.Wall[i] * myroom.RoomHeight);
             }
         }
-        void WindowsRectangleCount()
+       public void WindowsRectangleCount()
         {
             for (int i = 0; i < myroom.windowRectangles.Length; i++)
             {
@@ -49,7 +49,7 @@ namespace HomePaint.Data
                 }
             }
         }
-         void WindowsRoundCount()
+        public void WindowsRoundCount()
         {
             for (int i = 0; i < myroom.windowRounds.Length; i++)
             {
@@ -60,7 +60,7 @@ namespace HomePaint.Data
             }
         }
 
-        void PaintCount()
+       public void PaintCount()
         {
             TotalPaintCount = RoomTotalArea - (DoorTotalArea + WindowRectangleTotalArea + WindowRoundTotalArea);
             TotalPaintCount = TotalPaintCount / 10;

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace HomePaint.Data
 {
-     abstract class WindowController
+     public abstract class WindowController
     {
         public static double RoundArea(int diameter)
         {
