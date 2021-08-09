@@ -27,7 +27,7 @@ namespace UnitTestProjectForApp
             Assert.AreEqual(false, Control.ControlDoor(0, 1, 1));
             Assert.AreEqual(false, Control.ControlDoor(0, 0, 0));
             Assert.AreEqual(true, Control.ControlDoor(310, 100, 310000));
-        
+            
         }
 
         [TestMethod]
@@ -65,6 +65,7 @@ namespace UnitTestProjectForApp
         [TestMethod]
        public void AllMethodsTest()
         {
+            RoomControl c = new RoomControl();
             WindowRectangle[] wr = new WindowRectangle[5];
             WindowRound[] wround = new WindowRound[5];
             Door[] d = new Door[5];
@@ -119,7 +120,10 @@ namespace UnitTestProjectForApp
 
         public void WindowCount()
         {
-            Assert.AreEqual(7855,Math.Round(WindowController.RoundArea(100)));
+            Assert.AreEqual(7854,Math.Round(WindowController.RoundArea(100)));
+            Assert.AreEqual(0, WindowController.RoundArea(0));
+            Assert.AreEqual(100, WindowController.RectagleArea(10, 10));
+            
 
         }
     }

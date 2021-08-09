@@ -16,7 +16,7 @@ namespace HomePaint.Model
             WindowRoundArea();
         }
 
-        void WindowRoundArea()
+        public void WindowRoundArea()
         {
 
             Area = WindowController.RoundArea(Diameter);
