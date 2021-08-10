@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HomePaint\HomePaint.Android\HomePaint.Android.csproj">
+      <Project>{E7E20739-9DA3-4BE4-803F-046A33A83532}</Project>
+      <Name>HomePaint.Android</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HomePaint\HomePaint\HomePaint.csproj">
       <Project>{6A231422-A6A8-4F00-AA20-366FEAD2D3BF}</Project>
       <Name>HomePaint</Name>

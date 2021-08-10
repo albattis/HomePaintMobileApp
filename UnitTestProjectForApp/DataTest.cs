@@ -1,5 +1,6 @@
 ﻿using System;
 using HomePaint.Data;
+using HomePaint.Droid.Data;
 using HomePaint.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,10 +27,8 @@ namespace UnitTestProjectForApp
             Assert.AreEqual(true, Control.ControlDoor(1, 1, 1));
             Assert.AreEqual(false, Control.ControlDoor(0, 1, 1));
             Assert.AreEqual(false, Control.ControlDoor(0, 0, 0));
-            Assert.AreEqual(true, Control.ControlDoor(310, 100, 310000));
-            
+            Assert.AreEqual(true, Control.ControlDoor(310, 100, 310000));   
         }
-
         [TestMethod]
         public void ControlDataWindow()
         {
@@ -42,10 +41,7 @@ namespace UnitTestProjectForApp
             Assert.AreEqual(false, Control.ControlWindowRound(0, 134.00));
             Assert.AreEqual(false, Control.ControlWindowRound(0,0));
             Assert.AreEqual(true, Control.ControlWindowRound(1,1));
-        }
-
-
-        
+        }  
     }
     [TestClass]
     public class DoorControllers
@@ -58,7 +54,6 @@ namespace UnitTestProjectForApp
             Assert.AreEqual(100, DoorController.AreaCount(10, 10));
             }
     }
-
     [TestClass]
     public class PaintCounterTest
     {
@@ -107,12 +102,8 @@ namespace UnitTestProjectForApp
             Assert.AreEqual(21075, Math.Round(p.TotalPaintCount));
            
         }
-    
-
     }
-
     [TestClass]
-
     public class WindowControllerTest
     {
 
@@ -127,4 +118,17 @@ namespace UnitTestProjectForApp
 
         }
     }
+    [TestClass]
+    public class CheckInternet
+    {
+        [TestMethod]
+        [Obsolete]
+        public void ChekInternet()
+        {
+            NetworkConnection c = new NetworkConnection();
+            c.CheckNetworkConnection();
+            Assert.AreEqual(false, c.Isconnected);
+        }
+    }
+
 }

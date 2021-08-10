@@ -8,5 +8,6 @@ namespace HomePaint.Model
     {
         public static int IconHeight = 120;
         public static int Btn_Width = 200;
+        public static string NoInternetText = "No Internet please reconnect.";
     }
 }

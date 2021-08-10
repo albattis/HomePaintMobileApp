@@ -5,6 +5,7 @@
     <ContentPage.Content>
         <StackLayout x:Name="MasterStack" BackgroundColor="#4ea74a">
             <StackLayout x:Name="Logo" Margin="20,20,20,20">
+                <Label x:Name="lbl_Nointernet" HorizontalTextAlignment="Center" TextColor="white" BackgroundColor="red" />
                 <Image x:Name="LogoPaint" Source="Logo.png" HorizontalOptions="StartAndExpand"/>
                 
             </StackLayout>
