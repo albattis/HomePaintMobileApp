@@ -79,7 +79,7 @@ namespace HomePaint.Views
         {
            
             RoomControl Rc = new RoomControl();
-           
+
             try
             {
                 Rc.DoorControlAndAreaCount(MyRoom.doors);
@@ -108,18 +108,20 @@ namespace HomePaint.Views
 
                     await this.DisplayToastAsync("Adatok űresek", 5000);
                 }
-               
+
             }
-            catch (Exception t) {await DisplayAlert("s", $"{t.Message}{t}{MyRoom.doors.Length}", "OK"); }
+            catch (DivideByZeroException) { await this.DisplayToastAsync("Nem lehet 0-át megadni adatnak.", 3000); }
+            catch (Exception) { await DisplayAlert("s", "Hiba történt.", "OK"); }
+            
         }
         async void WindowClicked(object sender, EventArgs e)
         {
             RoomHeightNotNUll();
-            string height = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-            string width = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-
             try
             {
+                string height = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+                string width = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+            
                 if (MyRoom.windowRectangles[WindowRectagleCount] != null)
                 {
                     MyRoom.windowRectangles[WindowRectagleCount].Width = int.Parse(width);
@@ -146,7 +148,7 @@ namespace HomePaint.Views
                 };
                 await this.DisplaySnackBarAsync(options);
                 Console.WriteLine(WindowRectagleCount);
-                WindowRectagleCount++;
+                
                 
 
             }
@@ -154,16 +156,17 @@ namespace HomePaint.Views
             {
                 await DisplayAlert("Hiba", "Hiba történt az ablak hozzáadás közben", "Ok.");
             }
-            Console.WriteLine(WindowRectagleCount);
+            
 
         }
         async void WindowRoundClicked(object sender, EventArgs e)
         {
             RoomHeightNotNUll();
-            string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-
+            
             try
             {
+                string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
+
                 MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
                 var actions = new SnackBarActionOptions
                 {
@@ -195,18 +198,18 @@ namespace HomePaint.Views
             }
             catch (ArgumentOutOfRangeException)
             {
-                await DisplayAlert("Hiba", "Nem lehet több ajtót felvenni.", "Ok");
+                await DisplayAlert("Hiba", "Nem lehet több ablakot felvenni.", "Ok");
             }
             Console.WriteLine(WindowRoundCount);
         }
         async void DoorClicked(object sender, EventArgs e)
         {
             RoomHeightNotNUll();
-            string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-            string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
-            Console.WriteLine(DoorCounts);
+            
             try
             {
+                string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
+                string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
 
                 if (MyRoom.doors[DoorCounts] != null)
                 {
@@ -234,14 +237,12 @@ namespace HomePaint.Views
                 };
                 await this.DisplaySnackBarAsync(options);
 
-                DoorCounts++;
-                Console.WriteLine(DoorCounts);
             }
-            catch (Exception et)
+            catch (Exception)
             {
-                await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben {et}", "Ok.");
+                await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben", "Ok.");
             }
-            Console.WriteLine(DoorCounts);
+            
         }
 
         async void RoomPAgeAdd(object sender, EventArgs e)
@@ -275,7 +276,7 @@ namespace HomePaint.Views
                 await this.DisplaySnackBarAsync(options);
 
             }
-            catch (Exception a) { await DisplayAlert("error", $"{a}", "Ok"); }
+            catch (Exception) { await DisplayAlert("Hiba","Nem sikerült felvenni a Szoba adatait.", "Ok"); }
 
         }
     }

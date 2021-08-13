@@ -11,9 +11,9 @@
             
             <StackLayout x:Name="WindowProperty" VerticalOptions="Center">
                 <Button x:Name="Rooms" Text="Szoba oldalainak adatai" BackgroundColor="#DE9036" CornerRadius="10" Clicked="RoomPAgeAdd"/>
-                <Button x:Name="Btn_Doors" CornerRadius="10" Margin="5,5,5,5"  Text="Új ajtó hozzáadása" BackgroundColor="#DE9036" Clicked="DoorClicked"/>
-                <Button x:Name="Btn_Window" CornerRadius="10" Margin="5,5,5,5" Text="Új téglalap ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
-                <Button x:Name="Btn_WindowRound" CornerRadius="10" Margin="5,5,5,5" Text="Új kör alakú ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowRoundClicked"/>
+                <Button x:Name="Btn_Doors" CornerRadius="10" Margin="5,5,5,5"  Text="Ajtó hozzáadása" BackgroundColor="#DE9036" Clicked="DoorClicked"/>
+                <Button x:Name="Btn_Window" CornerRadius="10" Margin="5,5,5,5" Text="Négyszög ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowClicked"/>
+                <Button x:Name="Btn_WindowRound" CornerRadius="10" Margin="5,5,5,5" Text="Kör alakú ablak hozzáadása" BackgroundColor="#DE9036" Clicked="WindowRoundClicked"/>
                 <Button x:Name="Clears" CornerRadius="10" Text="Adatok üritése" Margin="5,5,5,5" Clicked="Clear" BackgroundColor="#DE9036" />
             </StackLayout>
             <StackLayout x:Name="Completed" VerticalOptions="End">

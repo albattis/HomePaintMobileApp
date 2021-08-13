@@ -1,6 +1,5 @@
 ﻿using System;
 using HomePaint.Data;
-using HomePaint.Droid.Data;
 using HomePaint.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -118,17 +117,6 @@ namespace UnitTestProjectForApp
 
         }
     }
-    [TestClass]
-    public class CheckInternet
-    {
-        [TestMethod]
-        [Obsolete]
-        public void ChekInternet()
-        {
-            NetworkConnection c = new NetworkConnection();
-            c.CheckNetworkConnection();
-            Assert.AreEqual(false, c.Isconnected);
-        }
-    }
+   
 
 }

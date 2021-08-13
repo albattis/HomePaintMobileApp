@@ -20,9 +20,9 @@ namespace HomePaint.Views
 
         void DataScreen(double d)
         {
-            App.StartCheckIfInternet(lbl_Nointernet, this);
+            
 
-            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{Math.Round(d)} Liter festék kell.";
+            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{Math.Round(d)} Liter festék.";
 
         }
 
