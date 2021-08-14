@@ -25,55 +25,22 @@ namespace HomePaint.Views
             Init();
         }
 
-        void RoomHeightNotNUll()
-        {
-            if (!(MyRoom.RoomHeight > 0))
-            {
-                RoomHeightSet();
-            }
-
-        }
+        
 
         async void Clear(object sender, EventArgs e)
         {
             MyRoom = new Room();
             await this.DisplayToastAsync("Adatok űritve", 5000);
         }
-        async void RoomHeightSet()
-        {
-            string a = await DisplayPromptAsync("Szoba magassága", "Szoba magassága Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
-            MyRoom.RoomHeight = int.Parse(a);
-        }
+        
         void Init()
         {
             Btn_Doors.WidthRequest = ViewSetting.Btn_Width;
-        }
-        
-        Task WallDelelte()
-        {
-            MyRoom.Wall = new int[4];
-            MyRoom.RoomHeight = 0;
-            return Task.CompletedTask;
-        }
-        Task DoorDelete()
-        {
-            MyRoom.doors[DoorCounts] = null;
-            DoorCounts--;
-            
-            return Task.CompletedTask;
-        }
-        Task WindowsRectagleCountDelete()
-        {
-            MyRoom.windowRectangles[WindowRectagleCount] = null;
-            WindowRectagleCount--;
-            return Task.CompletedTask;
-        }
-        Task WindowsRoundCountDelete()
-        {
-            MyRoom.windowRounds[WindowRoundCount] = null;
-            WindowRoundCount--;
-            return Task.CompletedTask;
-        }
+            Btn_Doors.IsVisible = false;
+            Btn_Window.IsVisible = false;
+            Btn_WindowRound.IsVisible = false;
+            Competed.IsVisible = false;
+        }             
         [Obsolete]
         async void AllDataCounterAsync(object sender, EventArgs e)
         {
@@ -85,12 +52,8 @@ namespace HomePaint.Views
                 Rc.DoorControlAndAreaCount(MyRoom.doors);
                 Rc.WindowRectangleControl(MyRoom.windowRectangles);
                 Rc.WindowRoundControl(MyRoom.windowRounds);
-
-
                 if (Rc.DoorsCount.Equals(DoorCounts) && Rc.WindRectangleCount.Equals(WindowRectagleCount) && Rc.WindRoundCount.Equals(WindowRoundCount))
                 {
-
-
                     if (MyRoom.RoomHeight > 0 && DoorCounts > 0)
                     {
                         Rc.DataSummary(MyRoom);
@@ -100,15 +63,12 @@ namespace HomePaint.Views
                     else
                     {
                         await this.DisplayToastAsync("Adatok űresek", 5000);
-
                     }
                 }
                 else
                 {
-
                     await this.DisplayToastAsync("Adatok űresek", 5000);
                 }
-
             }
             catch (DivideByZeroException) { await this.DisplayToastAsync("Nem lehet 0-át megadni adatnak.", 3000); }
             catch (Exception) { await DisplayAlert("s", "Hiba történt.", "OK"); }
@@ -116,41 +76,14 @@ namespace HomePaint.Views
         }
         async void WindowClicked(object sender, EventArgs e)
         {
-            RoomHeightNotNUll();
             try
             {
                 string height = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
                 string width = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
             
-                if (MyRoom.windowRectangles[WindowRectagleCount] != null)
-                {
-                    MyRoom.windowRectangles[WindowRectagleCount].Width = int.Parse(width);
-                    MyRoom.windowRectangles[WindowRectagleCount].Height = int.Parse(height);
-                }
-                else { MyRoom.windowRectangles[WindowRectagleCount] = new WindowRectangle(int.Parse(width), int.Parse(height)); }
-                Console.WriteLine(WindowRectagleCount);
-                var actions = new SnackBarActionOptions
-                {
-                    Action = () => WindowsRectagleCountDelete(),
-                    Text = "Visszavonás"
-                };
-
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.Black,
-                        Message = "Ablak hozzáadva."
-                    },
-                    BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(3),
-                    Actions = new[] { actions }
-                };
-                await this.DisplaySnackBarAsync(options);
-                Console.WriteLine(WindowRectagleCount);
-                
-                
-
+                MyRoom.windowRectangles[WindowRectagleCount] = new WindowRectangle(int.Parse(width), int.Parse(height)); 
+                await this.DisplayToastAsync("Ablak hozzáadva.", 5000);
+                WindowRectagleCount++;
             }
             catch (FormatException)
             {
@@ -161,34 +94,13 @@ namespace HomePaint.Views
         }
         async void WindowRoundClicked(object sender, EventArgs e)
         {
-            RoomHeightNotNUll();
-            
             try
             {
                 string Delimiter = await DisplayPromptAsync("Új ablak hozzáadása", "Ablak átmérője Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric);
 
                 MyRoom.windowRounds[WindowRoundCount] = new WindowRound(int.Parse(Delimiter));
-                var actions = new SnackBarActionOptions
-                {
-                    Action = () => WindowsRoundCountDelete() ,
-                    Text = "Visszavonás"
-                };
-                Console.WriteLine(WindowRoundCount);
+                await this.DisplayToastAsync("Ablak hozzáadva.", 5000);
 
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.Black,
-                        Message = "Ablak hozzáadva."
-                    },
-                    BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(3),
-                    Actions = new[] { actions }
-                };
-                await this.DisplaySnackBarAsync(options);
-
-                Console.WriteLine(WindowRoundCount);
                 WindowRoundCount++;
                 
             }
@@ -204,47 +116,22 @@ namespace HomePaint.Views
         }
         async void DoorClicked(object sender, EventArgs e)
         {
-            RoomHeightNotNUll();
-            
             try
             {
                 string height = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó magassága Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
                 string width = await DisplayPromptAsync("Új ajtó hozzáadása", "Ajtó szélessége Cm-ben", "OK", maxLength: 3, keyboard: Keyboard.Numeric);
 
-                if (MyRoom.doors[DoorCounts] != null)
-                {
-                    MyRoom.doors[DoorCounts].Height = int.Parse(height);
-                    MyRoom.doors[DoorCounts].Width = int.Parse(width);
-                }
-                else { MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height)); }
+               MyRoom.doors[DoorCounts] = new Door(int.Parse(width), int.Parse(height)); 
 
-                 var actions = new SnackBarActionOptions
-                {
-                    Action = () => DoorDelete(),
-                    Text = "Visszavonás"
-                };
-
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.Black,
-                        Message = "Ajtó hozzáadva."
-                    },
-                    BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(3),
-                    Actions = new[] { actions }
-                };
-                await this.DisplaySnackBarAsync(options);
-
+                await this.DisplayToastAsync("Ajtó hozzáadva.", 5000);
+                DoorCounts++;
+                Competed.IsVisible = true;
             }
             catch (Exception)
             {
                 await DisplayAlert("Hiba", $"Hiba történt az ajtó hozzáadás közben", "Ok.");
-            }
-            
+            }   
         }
-
         async void RoomPAgeAdd(object sender, EventArgs e)
         {
             try
@@ -255,25 +142,11 @@ namespace HomePaint.Views
             MyRoom.Wall[1] = int.Parse(await DisplayPromptAsync("Második fal", "Második fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[2] = int.Parse(await DisplayPromptAsync("Harmadik fal", "Harmadik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
             MyRoom.Wall[3] = int.Parse(await DisplayPromptAsync("Negyedik fal", "Negyedik fal szélessége Cm-ben", maxLength: 3, keyboard: Keyboard.Numeric));
-               
-                var actions = new SnackBarActionOptions
-                {
-                    Action = () => WallDelelte(),
-                    Text = "Visszavonás"
-                };
 
-                var options = new SnackBarOptions
-                {
-                    MessageOptions = new MessageOptions
-                    {
-                        Foreground = Color.Black,
-                        Message = "Szoba oldalak hozzáadva."
-                    },
-                    BackgroundColor = Color.FromHex("#DE9036"),
-                    Duration = TimeSpan.FromSeconds(10),
-                    Actions = new[] { actions }
-                };
-                await this.DisplaySnackBarAsync(options);
+                await this.DisplayToastAsync("Szoba hozzáadva.", 5000);
+                Btn_Doors.IsVisible = true;
+                Btn_Window.IsVisible = true;
+                Btn_WindowRound.IsVisible = true;
 
             }
             catch (Exception) { await DisplayAlert("Hiba","Nem sikerült felvenni a Szoba adatait.", "Ok"); }

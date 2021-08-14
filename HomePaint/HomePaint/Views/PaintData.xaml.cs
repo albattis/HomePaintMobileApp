@@ -22,7 +22,7 @@ namespace HomePaint.Views
         {
             
 
-            DataLoad.Text = $"A festékshez szükséges átlagolt festékmennyiség:\n\t\t{Math.Round(d)} Liter festék.";
+            DataLoad.Text = $"A festéshez szükséges átlagolt festékmennyiség:\n\t\t{Math.Round(d)} Liter festék.";
 
         }
 
